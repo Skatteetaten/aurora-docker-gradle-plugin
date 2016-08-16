@@ -32,7 +32,12 @@ class AuroraDockerPlugin implements Plugin<Project> {
         dependsOn buildImage
         doLast {
           String imageTag = "$auroradocker.imageName:${version}"
-          List<String> tags = createImageTags(project)
+          String imageNameWithRegistry = "$auroradocker.registry/$auroradocker.imageName"
+          // If the revision property has been set, we include a tag with it included.
+          // The aurora plugin, by default, sets the revision property to the current git hash.
+          List<String> versions = DockerTagTools.createVersionTagsFromVersionAndRevision(project.version, project.revision)
+          List<String> tags = versions.collect { "$imageNameWithRegistry:$it" }
+
           tags.each { tag ->
             ProcessTools.runCommand("docker tag -f $imageTag $tag")
           }
@@ -51,35 +56,6 @@ class AuroraDockerPlugin implements Plugin<Project> {
 
       build.dependsOn tagImage
       pushImage.mustRunAfter build
-    }
-  }
-
-  private List<String> createImageTags(Project project) {
-    project.with {
-      Optional<Version> versionOption = getSemanticVersionFromVersionString(version)
-
-      List<String> versions = versionOption.map { v ->
-        [version, 'latest', "${v.majorVersion}", "${v.majorVersion}.${v.minorVersion}"]
-      }.orElseGet {
-        def versions = [version]
-        if (project.revision) {
-          // If the revision property has been set, we include a tag with it included.
-          // The aurora plugin, by default, sets the revision property to the current git hash.
-          versions.add("$version-$revision")
-        }
-        versions
-      }
-      String imageNameWithRegistry = "$auroradocker.registry/$auroradocker.imageName"
-      List<String> tags = versions.collect { "$imageNameWithRegistry:$it" }
-      tags
-    }
-  }
-
-  static Optional<Version> getSemanticVersionFromVersionString(String versionString) {
-    try {
-      return Optional.of(Version.valueOf(versionString))
-    } catch (Exception e) {
-      return Optional.empty()
     }
   }
 }
