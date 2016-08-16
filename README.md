@@ -50,11 +50,20 @@ følger `Semantic Versioning`. Følgende tagger blir pushet basert på versjon:
 | Versjon         | Tagger                                                                       |
 |-----------------|------------------------------------------------------------------------------|
 | 1.0.0           | `1`, `1.0`, `1.0.0`, `latest`                                                |
+| 1.0.0-rc.1      | `1.0.0-rc.1`                                                                 |
+| 1.0.0-GA        | `1.0.0-GA`                                                                   |
 | master-SNAPSHOT | `master-SNAPSHOT` og dersom `revision` er satt `master-SNAPSHOT-${revision}` |
 
+Merk at alt etter `1.0.0` betraktes som prerelease version, og versjoner med prerelease version satt kun får sin versjon som tag. Dette
+er for å unngå at f.eks. `1.2.0-rc.1` skal overskrive `1` taggen dersom f.eks. `1.1.0` allerede er releaset.
 
 ## Release notes
 
+### 1.0.1 (2016.08.16)
+
+ * Fikset et problem med generering av tagger for versjoner med prerelease version satt
+
+
 ### 1.0.0 (2016.08.16)
 
-* Første release med feature set som dokumentert
+ * Første release med feature set som dokumentert
