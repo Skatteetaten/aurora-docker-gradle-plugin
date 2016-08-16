@@ -37,7 +37,7 @@ Legg følgende i toppen av din `build.gradle` fil
 
 Følgende tasker blir opprettet
 
- * buildImage - Bygger imaget med `docker build`
+ * buildImage - Bygger imaget med `docker build`. Etter bygget er ferfig er id til det byggede imaget tilgjengelig via `imageId` propertyen på tasken. 
  * tagImage - Tagger det byggede image med tags som beskrevet under
  * pushImage - Pusher tags
 
