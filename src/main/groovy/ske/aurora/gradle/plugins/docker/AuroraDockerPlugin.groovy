@@ -35,7 +35,7 @@ class AuroraDockerPlugin implements Plugin<Project> {
           String imageNameWithRegistry = "$auroradocker.registry/$auroradocker.imageName"
           // If the revision property has been set, we include a tag with it included.
           // The aurora plugin, by default, sets the revision property to the current git hash.
-          List<String> versions = DockerTagTools.createVersionTagsFromVersionAndRevision(project.version, project.revision)
+          Set<String> versions = DockerTagTools.createVersionTagsFromVersionAndRevision(project.version, project.revision)
           List<String> tags = versions.collect { "$imageNameWithRegistry:$it" }
 
           tags.each { tag ->
