@@ -59,6 +59,11 @@ er for å unngå at f.eks. `1.2.0-rc.1` skal overskrive `1` taggen dersom f.eks.
 
 ## Release notes
 
+### 1.0.2 (2016.08.18)
+
+* Ingen reelle endringer. Bare første release fra Jenkins.
+
+
 ### 1.0.1 (2016.08.16)
 
  * Fikset et problem med generering av tagger for versjoner med prerelease version satt
