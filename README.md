@@ -44,7 +44,7 @@ Følgende tasker blir opprettet
 
 ## Generering av tags
 
-Under tagging av imaget blir det generert flere tagger basert på projektets versjon dersom denne versjonen
+Under tagging av imaget blir det generert flere tagger basert på prosjektets versjon dersom denne versjonen
 følger `Semantic Versioning`. Følgende tagger blir pushet basert på versjon:
 
 | Versjon         | Tagger                                                                       |
