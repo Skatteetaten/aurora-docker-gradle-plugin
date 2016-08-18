@@ -47,7 +47,9 @@ class AuroraDockerPlugin implements Plugin<Project> {
       task('pushImage') {
         dependsOn tagImage
         doLast {
-          List<String> tags = createImageTags(project)
+          String imageNameWithRegistry = "$auroradocker.registry/$auroradocker.imageName"
+          Set<String> versions = DockerTagTools.createVersionTagsFromVersionAndRevision(project.version, project.revision)
+          List<String> tags = versions.collect { "$imageNameWithRegistry:$it" }
           tags.each { tag ->
             ProcessTools.runCommand("docker push $tag")
           }
