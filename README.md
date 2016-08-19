@@ -59,6 +59,11 @@ er for å unngå at f.eks. `1.2.0-rc.1` skal overskrive `1` taggen dersom f.eks.
 
 ## Release notes
 
+### 1.0.5 (2016.08.19)
+
+* Ingen reelle endringer. Bare justering av bygg.
+
+
 ### 1.0.3 og 1.0.4 (2016.08.18)
 
 * Bugfix
