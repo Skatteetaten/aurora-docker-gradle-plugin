@@ -13,10 +13,14 @@ class AuroraDockerPlugin implements Plugin<Project> {
       extensions.create('auroradocker', AuroraDockerPluginExtension)
 
       task('buildImage') << {
-        String imageTag = "$auroradocker.imageName:${version}"
-        String buildArgsString = createBuildArgsString(auroradocker.buildArgs)
+
         String workDir = new File(project.auroradocker.workingDir)
-        ProcessTools.Result result = ProcessTools.runCommand("docker build  $buildArgsString --rm -t $imageTag .", workDir)
+
+        String imageTag = "$auroradocker.imageName:${version}"
+        GString buildCmd = DockerCommands.createBuildCommand(imageTag, auroradocker.buildArgs)
+
+        ProcessTools.Result result = ProcessTools.runCommand(buildCmd, workDir)
+
         if (result.process.exitValue() != 0) {
           throw new GradleException("An error occurred while building the image. Inspect output for more details.")
         }
@@ -58,10 +62,5 @@ class AuroraDockerPlugin implements Plugin<Project> {
       build.dependsOn tagImage
       pushImage.mustRunAfter build
     }
-  }
-
-  private static String createBuildArgsString(Map<String, String> buildArgs) {
-
-    buildArgs.collect { k, v -> "--build-arg $k=$v" }.join(' ')
   }
 }
