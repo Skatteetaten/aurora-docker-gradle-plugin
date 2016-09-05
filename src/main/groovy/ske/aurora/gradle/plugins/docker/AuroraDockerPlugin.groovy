@@ -4,8 +4,6 @@ import org.gradle.api.GradleException
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 
-import com.github.zafarkhaja.semver.Version
-
 class AuroraDockerPlugin implements Plugin<Project> {
 
   @Override
@@ -16,8 +14,9 @@ class AuroraDockerPlugin implements Plugin<Project> {
 
       task('buildImage') << {
         String imageTag = "$auroradocker.imageName:${version}"
+        String buildArgsString = createBuildArgsString(auroradocker.buildArgs)
         String workDir = new File(project.auroradocker.workingDir)
-        ProcessTools.Result result = ProcessTools.runCommand("docker build --rm -t $imageTag .", workDir)
+        ProcessTools.Result result = ProcessTools.runCommand("docker build  $buildArgsString --rm -t $imageTag .", workDir)
         if (result.process.exitValue() != 0) {
           throw new GradleException("An error occurred while building the image. Inspect output for more details.")
         }
@@ -59,5 +58,10 @@ class AuroraDockerPlugin implements Plugin<Project> {
       build.dependsOn tagImage
       pushImage.mustRunAfter build
     }
+  }
+
+  private static String createBuildArgsString(Map<String, String> buildArgs) {
+
+    buildArgs.collect { k, v -> "--build-arg $k=$v" }.join(' ')
   }
 }

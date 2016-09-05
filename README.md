@@ -27,6 +27,9 @@ Legg følgende i toppen av din `build.gradle` fil
       imageName = 'tilhørighet/image'
       registry = "docker.skead.no:5000" // Registryet du vil pushe til. Eksempelet er ikke nødvendigvis riktig.
       workingDir = "$buildDir/docker" // Mappen Dockefile ligger
+      buildArgs = [
+        arg1: 'value'
+      ]
     }
 
 
@@ -58,6 +61,11 @@ Merk at alt etter `1.0.0` betraktes som prerelease version, og versjoner med pre
 er for å unngå at f.eks. `1.2.0-rc.1` skal overskrive `1` taggen dersom f.eks. `1.1.0` allerede er releaset.
 
 ## Release notes
+
+### 1.1.0 (2016.09.05)
+
+* La til støtte for build-args
+
 
 ### 1.0.5 (2016.08.19)
 
