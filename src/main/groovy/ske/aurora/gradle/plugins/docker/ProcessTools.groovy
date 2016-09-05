@@ -1,8 +1,12 @@
 package ske.aurora.gradle.plugins.docker
 
 import org.apache.commons.io.output.TeeOutputStream
+import org.slf4j.Logger
+import org.slf4j.LoggerFactory
 
 class ProcessTools {
+
+  private static Logger logger = LoggerFactory.getLogger(ProcessTools)
 
   static class Result {
     Process process
@@ -12,6 +16,7 @@ class ProcessTools {
   public static Result runCommand(String cmd, File workingDir = null) {
 
     String[] env = []
+    logger.info("Executing command [$cmd]")
     Process p = Runtime.getRuntime().exec(cmd, env, workingDir)
 
     def output = new ByteArrayOutputStream()
