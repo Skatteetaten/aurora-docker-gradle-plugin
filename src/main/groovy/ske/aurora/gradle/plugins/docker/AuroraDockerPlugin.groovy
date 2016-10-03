@@ -61,8 +61,8 @@ class AuroraDockerPlugin implements Plugin<Project> {
 
       if (project.hasProperty('build')) {
         build.dependsOn tagImage
+        pushImage.mustRunAfter build
       }
-      pushImage.mustRunAfter build
     }
   }
 }
