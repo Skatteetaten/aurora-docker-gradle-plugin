@@ -17,7 +17,7 @@ Legg følgende i toppen av din `build.gradle` fil
         ...
     
         dependencies {
-            'ske.aurora.gradle.plugins:aurora-docker-plugin:1.0.0'
+            'ske.aurora.gradle.plugins:aurora-docker-plugin:1.1.1'
         }
     }
     
@@ -61,6 +61,11 @@ Merk at alt etter `1.0.0` betraktes som prerelease version, og versjoner med pre
 er for å unngå at f.eks. `1.2.0-rc.1` skal overskrive `1` taggen dersom f.eks. `1.1.0` allerede er releaset.
 
 ## Release notes
+
+### 1.1.1 (2016.10.03)
+
+* Bugfix - Prosjekter ut build task kunne ikke bruke plugin
+
 
 ### 1.1.0 (2016.09.05)
 
