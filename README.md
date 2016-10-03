@@ -17,7 +17,7 @@ Legg følgende i toppen av din `build.gradle` fil
         ...
     
         dependencies {
-            'ske.aurora.gradle.plugins:aurora-docker-plugin:1.1.2'
+            'ske.aurora.gradle.plugins:aurora-docker-plugin:1.1.3'
         }
     }
     
@@ -62,7 +62,7 @@ er for å unngå at f.eks. `1.2.0-rc.1` skal overskrive `1` taggen dersom f.eks.
 
 ## Release notes
 
-### 1.1.1 og 1.1.2 (2016.10.03)
+### 1.1.1 - 1.1.3 (2016.10.03)
 
 * Bugfix - Prosjekter ut build task kunne ikke bruke plugin
 

@@ -17,7 +17,7 @@ class AuroraDockerPlugin implements Plugin<Project> {
         String workDir = new File(project.auroradocker.workingDir)
 
         String imageTag = "$auroradocker.imageName:${version}"
-        GString buildCmd = DockerCommands.createBuildCommand(imageTag, auroradocker.buildArgs)
+        String buildCmd = DockerCommands.createBuildCommand(imageTag, auroradocker.buildArgs)
 
         ProcessTools.Result result = ProcessTools.runCommand(buildCmd, workDir)
 
