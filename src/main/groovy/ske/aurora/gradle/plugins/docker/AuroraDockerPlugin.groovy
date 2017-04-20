@@ -42,7 +42,7 @@ class AuroraDockerPlugin implements Plugin<Project> {
           List<String> tags = versions.collect { "$imageNameWithRegistry:$it" }
 
           tags.each { tag ->
-            ProcessTools.runCommand("docker tag -f $imageTag $tag")
+            ProcessTools.runCommand("docker tag $imageTag $tag")
           }
         }
       }
