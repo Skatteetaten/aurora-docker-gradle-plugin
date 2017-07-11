@@ -17,7 +17,10 @@ repositories {
 
 
 ext.aurora = [
-    requireStaging: false
+    requireStaging: false,
+    applyNexusRepositores: false,
+    applyDeliveryBundleConfig: false
+
 ]
 
 apply plugin: 'groovy'
