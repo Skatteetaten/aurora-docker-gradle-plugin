@@ -1,4 +1,4 @@
-package ske.aurora.gradle.plugins.docker
+package no.skatteetaten.aurora.gradle.plugins.docker
 
 class DockerTools {
   static String getImageIdFromOutput(String output) {

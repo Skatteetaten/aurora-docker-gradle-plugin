@@ -1,4 +1,4 @@
-package ske.aurora.gradle.plugins.docker
+package no.skatteetaten.aurora.gradle.plugins.docker
 
 import org.apache.commons.io.output.TeeOutputStream
 import org.slf4j.Logger

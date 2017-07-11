@@ -1,4 +1,4 @@
-package ske.aurora.gradle.plugins.docker
+package no.skatteetaten.aurora.gradle.plugins.docker
 
 import com.github.zafarkhaja.semver.Version
 
