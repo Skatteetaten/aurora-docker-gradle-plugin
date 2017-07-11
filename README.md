@@ -18,7 +18,7 @@ Add the following to the top of your gradle file `build.gradle`
         ...
     
         dependencies {
-            'no.skatteetaten.aurora.gradle.plugins:aurora-docker-plugin:1.1.3'
+            'no.skatteetaten.aurora.gradle.plugins:aurora-docker-plugin:1.0.0'
         }
     }
     
