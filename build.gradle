@@ -1,13 +1,19 @@
 buildscript {
   repositories {
-    maven {
-      url "${nexusUrl}/content/groups/public"
-    }
+    jcenter()
+    mavenCentral()
   }
   dependencies {
     classpath "no.skatteetaten.aurora.gradle.plugins:aurora-gradle-plugin:1.1.0"
   }
 }
+
+repositories {
+  mavenCentral()
+  jcenter()
+  mavenLocal()
+}
+
 
 ext.aurora = [
     requireStaging: false
@@ -16,6 +22,7 @@ ext.aurora = [
 apply plugin: 'no.skatteetaten.plugins.aurora'
 apply plugin: 'groovy'
 apply plugin: 'maven'
+apply plugin: 'signing'
 
 group = 'no.skatteetaten.aurora.gradle.plugins'
 
@@ -32,6 +39,7 @@ dependencies {
 }
 
 install.dependsOn << build
+
 
 task javadocJar(type: Jar) {
   classifier = 'javadoc'
@@ -67,9 +75,9 @@ if (ext.has("ossrhUsername") && ext.has("ossrhPassword")) {
         }
 
         pom.project {
-          name 'Aurora Gradle Plugin'
+          name 'Aurora Docker Plugin'
           packaging 'jar'
-          description 'A plugin that will apply a sensible base line for JVM applications developed by the Norwegian Tax Authority'
+          description 'A plugin that is used to build docker image using gradle.'
           url 'https://github.com/Skatteetaten/aurora-docker-plugin'
 
           scm {
@@ -97,6 +105,8 @@ if (ext.has("ossrhUsername") && ext.has("ossrhPassword")) {
     }
   }
 }
+
+
 
 task wrapper(type: Wrapper) {
   gradleVersion = "2.13"
