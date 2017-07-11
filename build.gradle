@@ -20,7 +20,8 @@ ext.aurora = [
     requireStaging: false,
     applyNexusRepositores: false,
     applyDeliveryBundleConfig: false,
-    applyAsciiDocPlugin: false
+    applyAsciiDocPlugin: false,
+    groovyVersion: "2.4.7"
 ]
 
 apply plugin: 'signing'
