@@ -2,10 +2,10 @@ buildscript {
   repositories {
     jcenter()
     mavenCentral()
-    mavenLocal()
+//    mavenLocal()
   }
   dependencies {
-    classpath "no.skatteetaten.aurora.gradle.plugins:aurora-gradle-plugin:feature_AOS_1913_sonarqube_gradle_plugin-SNAPSHOT"
+    classpath "no.skatteetaten.aurora.gradle.plugins:aurora-gradle-plugin:1.2.1"
   }
 }
 
