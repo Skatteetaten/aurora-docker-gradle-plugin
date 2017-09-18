@@ -5,7 +5,7 @@ buildscript {
     mavenLocal()
   }
   dependencies {
-    classpath "no.skatteetaten.aurora.gradle.plugins:aurora-gradle-plugin:1.1.0"
+    classpath "no.skatteetaten.aurora.gradle.plugins:aurora-gradle-plugin:feature_AOS_1913_sonarqube_gradle_plugin-SNAPSHOT"
   }
 }
 
@@ -21,7 +21,7 @@ ext.aurora = [
     applyNexusRepositores: false,
     applyDeliveryBundleConfig: false,
     applyAsciiDocPlugin: false,
-    groovyVersion: "2.4.7"
+    groovyVersion: "2.4.11"
 ]
 
 apply plugin: 'signing'
@@ -106,7 +106,6 @@ if (ext.has("ossrhUsername") && ext.has("ossrhPassword")) {
 }
 
 
-
 task wrapper(type: Wrapper) {
-  gradleVersion = "3.0"
+  gradleVersion = "4.1"
 }
