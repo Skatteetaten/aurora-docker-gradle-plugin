@@ -57,7 +57,7 @@ class AuroraDockerPlugin implements Plugin<Project> {
               createVersionTagsFromVersionAndRevision(project.version, project.revision)
           List<String> tags = versions.collect { "$imageNameWithRegistry:$it" }
           tags.each { tag ->
-            ProcessTools.runCommand("docker push $tag")
+            ProcessTools.runCommand("docker push $tag", null, null)
           }
         }
       }
