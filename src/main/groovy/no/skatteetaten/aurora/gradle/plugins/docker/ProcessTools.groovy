@@ -13,9 +13,8 @@ class ProcessTools {
     String output
   }
 
-  public static Result runCommand(String cmd, File workingDir = null) {
+  public static Result runCommand(String cmd, String[] env, File workingDir = null) {
 
-    String[] env = []
     logger.info("Executing command [$cmd]")
     Process p = Runtime.getRuntime().exec(cmd, env, workingDir)
 
@@ -23,6 +22,12 @@ class ProcessTools {
     def processOutput = new TeeOutputStream(System.out, output)
     p.waitForProcessOutput(processOutput, processOutput)
     new Result(process: p, output: output.toString())
+  }
+
+  public static Result runCommand(String cmd, File workingDir = null) {
+
+    String[] emptyenv = []
+    runCommand(cmd, emptyenv, workingDir)
   }
 
   public static Result runCommand(String cmd, String workingDir) {
