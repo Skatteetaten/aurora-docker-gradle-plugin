@@ -26,7 +26,8 @@ class ProcessTools {
 
   public static Result runCommand(String cmd, File workingDir = null) {
 
-    runCommand(cmd, [], workingDir)
+    String[] emptyenv = []
+    runCommand(cmd, emptyenv, workingDir)
   }
 
   public static Result runCommand(String cmd, String workingDir) {
