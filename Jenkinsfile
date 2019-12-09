@@ -8,7 +8,6 @@ def overrides = [
     disableAllReports: true,
     pipelineScript: 'https://git.aurora.skead.no/scm/ao/aurora-pipeline-scripts.git',
     credentialsId: "github",
-    javaVersion: 11,
     jiraFiksetIKomponentversjon: true,
     deployTo: "gradle-plugin-portal",
     chatRoom: "#aos-notifications",
@@ -25,7 +24,8 @@ fileLoader.withGit(overrides.pipelineScript,, overrides.scriptVersion) {
 jenkinsfile.gradle(overrides.scriptVersion, overrides, {
 
   if(it.isSnapshotVersion) {
-    error("Cannot publish snapshot version to gradle plugin portal")
+    it.version="2.0.0-rc4"
+    //error("Cannot publish snapshot version to gradle plugin portal")
   }
 
 })
