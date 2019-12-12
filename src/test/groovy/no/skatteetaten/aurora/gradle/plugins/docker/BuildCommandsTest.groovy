@@ -2,12 +2,12 @@ package no.skatteetaten.aurora.gradle.plugins.docker
 
 import spock.lang.Specification
 
-class DockerCommandsTest extends Specification {
+class BuildCommandsTest extends Specification {
 
   def "Test docker command"() {
 
     when:
-      String cmd = DockerCommands.createBuildCommand(tag, buildArgs)
+      String cmd = BuildCommands.createDockerBuildCommand(tag, buildArgs)
     then:
       cmd == expectedCmd
 

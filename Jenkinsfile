@@ -24,6 +24,7 @@ fileLoader.withGit(overrides.pipelineScript,, overrides.scriptVersion) {
 jenkinsfile.gradle(overrides.scriptVersion, overrides, {
 
   if(it.isSnapshotVersion) {
+    //it.version="2.1.0-rc13"
     error("Cannot publish snapshot version to gradle plugin portal")
   }
 

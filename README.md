@@ -56,3 +56,5 @@ Several tags are made based up on `Semantic Versioning`. See the table below
 | master-SNAPSHOT | `master-SNAPSHOT` and if  `revision` is set `master-SNAPSHOT-${revision}`    |
 
 Note that everything after `1.0.0` is considered a prerelease and will not get extra semantic tags. 
+
+See also https://plugins.gradle.org/plugin/no.skatteetaten.gradle.aurora-docker for generated documentation after build
