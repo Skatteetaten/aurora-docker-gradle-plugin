@@ -19,13 +19,14 @@ class AuroraDockerPlugin implements Plugin<Project> {
           String buildCmd
           ProcessTools.Result result
           if (auroradocker.buildStrategy == "buildah") {
-            def imageUUID = UUID.randomUUID().toString()
-            buildCmd = BuildCommands.createBuildahBuildCommand(imageUUID, auroradocker.buildArgs)
+            String imageUUID = UUID.randomUUID().toString()
+            String imageName = "$auroradocker.imageName:${imageUUID}"
+            buildCmd = BuildCommands.createBuildahBuildCommand(imageName, auroradocker.buildArgs)
             result = ProcessTools.runCommand(buildCmd, null, new File(workDir))
             if (result.process.exitValue() != 0) {
               throw new GradleException("An error occurred while building the image. Inspect output for more details.")
             }
-            ext.imageId = imageUUID;
+            ext.imageId = imageName;
           } else { // docker
             buildCmd = BuildCommands.createDockerBuildCommand(imageTag, auroradocker.buildArgs)
             result = ProcessTools.runCommand(buildCmd, workDir)
@@ -52,10 +53,10 @@ class AuroraDockerPlugin implements Plugin<Project> {
           List<String> tags = versions.collect { "$imageNameWithRegistry:$it" }
           String tagCmd
           if (auroradocker.buildStrategy == "buildah") {
-            String imageUUID = buildImage.imageId
+            String imageName = buildImage.imageId
             tagCmd = BuildCommands.createBuildahTagCommand()
             tags.each { tag ->
-              ProcessTools.runCommand("$tagCmd $imageUUID $tag")
+              ProcessTools.runCommand("$tagCmd $imageName $tag")
             }
           } else { // docker
             String imageTag = "$auroradocker.imageName:${version}"
@@ -75,13 +76,20 @@ class AuroraDockerPlugin implements Plugin<Project> {
               createVersionTagsFromVersionAndRevision(project.version, project.revision)
           List<String> tags = versions.collect { "$imageNameWithRegistry:$it" }
           String pushCmd
+          PushCredentials creds = BuildCommands.getPushCredentials("$auroradocker.registry")
           if (auroradocker.buildStrategy == "buildah") {
-            pushCmd = BuildCommands.createBuildahPushCommand()
+            pushCmd = BuildCommands.createBuildahPushCommand(creds)
+            tags.each { tag ->
+              ProcessTools.Result result = ProcessTools.runCommand("$pushCmd $tag $tag", null, null)
+              if (result.process.exitValue() != 0) {
+                throw new GradleException("An error occurred while pushing image. Inspect output for more details.")
+              }
+            }
           } else { // docker
             pushCmd = BuildCommands.createDockerPushCommand()
-          }
-          tags.each { tag ->
-            ProcessTools.runCommand(pushCmd + " $tag", null, null)
+            tags.each { tag ->
+              ProcessTools.runCommand("$pushCmd $tag", null, null)
+            }
           }
         }
       }
