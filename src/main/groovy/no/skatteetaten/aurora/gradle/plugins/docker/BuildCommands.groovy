@@ -17,6 +17,10 @@ class BuildCommands {
     "buildah --storage-driver vfs bud --quiet --isolation chroot $buildArgsString -t $imageName -f $buildContext ."
   }
 
+  public static String createDockerLoginCommand(PushCredentials creds) {
+    "docker login -u ${creds.username} -p ${creds.password} ${creds.serveraddress}"
+  }
+
   public static String createDockerTagCommand() {
     "docker tag"
   }
@@ -67,9 +71,9 @@ class BuildCommands {
         pushCredentials.username = foundcreds.username
         pushCredentials.password = foundcreds.password
         pushCredentials.serveraddress = pushregistry
-        println "Remove me when finished testing"
-        println "Found credentials for $pushregistry"
-        println "$pushCredentials.username:$pushCredentials.password => $pushCredentials.serveraddress"
+        //println "Remove me when finished testing"
+        //println "Found credentials for $pushregistry"
+        //println "$pushCredentials.username:$pushCredentials.password => $pushCredentials.serveraddress"
 
         return pushCredentials
       } else {

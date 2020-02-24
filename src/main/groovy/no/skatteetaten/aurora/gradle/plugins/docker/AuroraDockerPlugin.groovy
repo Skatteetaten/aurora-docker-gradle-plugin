@@ -86,6 +86,13 @@ class AuroraDockerPlugin implements Plugin<Project> {
               }
             }
           } else { // docker
+            if (creds != null) {
+              loginCmd = BuildCommands.createDockerLoginCommand(creds)
+              ProcessTools.Result result = ProcessTools.runCommand("$loginCmd", null, null)
+              if (result.process.exitValue() != 0) {
+                throw new GradleException("An error occurred while executing docker login. Inspect output for more details.")
+              }
+            }
             pushCmd = BuildCommands.createDockerPushCommand()
             tags.each { tag ->
               ProcessTools.runCommand("$pushCmd $tag", null, null)
