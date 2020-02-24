@@ -71,9 +71,6 @@ class BuildCommands {
         pushCredentials.username = foundcreds.username
         pushCredentials.password = foundcreds.password
         pushCredentials.serveraddress = pushregistry
-        //println "Remove me when finished testing"
-        //println "Found credentials for $pushregistry"
-        //println "$pushCredentials.username:$pushCredentials.password => $pushCredentials.serveraddress"
 
         return pushCredentials
       } else {
