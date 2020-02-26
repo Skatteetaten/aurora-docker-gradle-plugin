@@ -17,6 +17,10 @@ class BuildCommands {
     "buildah --storage-driver vfs bud --quiet --isolation chroot $buildArgsString -t $imageName -f $buildContext ."
   }
 
+  public static String createDockerLoginCommand(PushCredentials creds) {
+    "docker login -u ${creds.username} -p ${creds.password} ${creds.serveraddress}"
+  }
+
   public static String createDockerTagCommand() {
     "docker tag"
   }
