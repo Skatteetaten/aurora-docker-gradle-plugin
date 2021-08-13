@@ -2,7 +2,8 @@ def jenkinsfile
 
 def overrides = [
     scriptVersion  : 'v7',
-    iq : false,
+    iq : true,
+    iqOrganizationName : 'Team APS',
     checkstyle : false,
     openShiftBuild: false,
     disableAllReports: true,
